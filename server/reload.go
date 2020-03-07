@@ -565,6 +565,7 @@ func (s *Server) Reload() error {
 	clusterOrgPort := curOpts.Cluster.Port
 	gatewayOrgPort := curOpts.Gateway.Port
 	leafnodesOrgPort := curOpts.LeafNode.Port
+	websocketOrgPort := curOpts.Websocket.Port
 
 	s.mu.Unlock()
 
@@ -593,6 +594,9 @@ func (s *Server) Reload() error {
 	}
 	if newOpts.LeafNode.Port == -1 {
 		newOpts.LeafNode.Port = leafnodesOrgPort
+	}
+	if newOpts.Websocket.Port == -1 {
+		newOpts.Websocket.Port = websocketOrgPort
 	}
 
 	if err := s.reloadOptions(curOpts, newOpts); err != nil {
